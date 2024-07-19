@@ -97,5 +97,20 @@
         }
       }
     }
+    //footer
+    .footer {
+      margin: 100px;
+      padding: 20px;
+      background-color: aqua;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 12px;
+      img {
+        height: 50px;
+        width: 50px;
+        border-radius: 50%;
+      }
+    }
   }
 }

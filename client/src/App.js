@@ -1,4 +1,4 @@
-import "./App.css";
+import "./styled.scss";
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 import Home from "./pages/Home";
 import Login from "./pages/Login";

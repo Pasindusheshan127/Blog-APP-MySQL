@@ -1,6 +1,6 @@
 import mysql from "mysql";
 
-const connection = mysql.createConnection({
+export const db = mysql.createConnection({
   host: "localhost",
   user: "root",
   password: "Root123#",

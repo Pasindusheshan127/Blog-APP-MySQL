@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import axios from "axios";
+import { AuthContext } from "../context/authContext";
 
 const Login = () => {
   const [inputs, setInputs] = useState({
@@ -11,6 +11,7 @@ const Login = () => {
   const [error, setError] = useState(null);
 
   const navigate = useNavigate();
+  const { login } = useContext(AuthContext);
 
   const handleChange = (e) => {
     setInputs((pre) => ({ ...pre, [e.target.name]: e.target.value }));
@@ -19,20 +20,17 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post(
-        "http://localhost:8800/api/auth/login",
-        inputs
-      );
+      await login(inputs);
       navigate("/");
     } catch (e) {
-      setError(e.response.data);
+      setError(e.response ? e.response.data : "An unexpected error occurred");
     }
   };
 
   return (
     <div className="auth">
       <h1>Login</h1>
-      <form>
+      <form onSubmit={handleSubmit}>
         <input
           type="text"
           placeholder="username"
@@ -45,10 +43,10 @@ const Login = () => {
           name="password"
           onChange={handleChange}
         />
-        <button onClick={handleSubmit}>Login</button>
+        <button type="submit">Login</button>
         {error && <p>{error}</p>}
         <span>
-          Don't you have an acccount <Link to="/register">Register</Link>
+          Don't you have an account? <Link to="/register">Register</Link>
         </span>
       </form>
     </div>

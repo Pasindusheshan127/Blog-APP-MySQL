@@ -47,7 +47,11 @@ const Single = () => {
           </div>
           {currentUser.username === post.username && (
             <div className="edit">
-              <Link to={"/write/?edit=2"} style={{ textDecoration: "none" }}>
+              <Link
+                to={"/write/?edit=2"}
+                style={{ textDecoration: "none" }}
+                state={post}
+              >
                 <img src={Eddit} alt="" />
               </Link>
               <Link to={"/write/?edit=2"} style={{ textDecoration: "none" }}>
@@ -59,7 +63,7 @@ const Single = () => {
         <h1 className="title">{post.title}</h1>
         {post.desc}
       </div>
-      <Menu />
+      <Menu cat={post.cat} />
     </div>
   );
 };

@@ -1,30 +1,45 @@
-const Menu = () => {
-  const posts = [
-    {
-      id: 1,
-      title: "Lorem ipsum dolor sit amet",
-      desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit, non.",
-      img: "https://images.pexels.com/photos/7008010/pexels-photo-7008010.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-    },
-    {
-      id: 2,
-      title: "Lorem ipsum dolor sit amet",
-      desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit, non.",
-      img: "https://images.pexels.com/photos/6489663/pexels-photo-6489663.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-    },
-    {
-      id: 3,
-      title: "Lorem ipsum dolor sit amet",
-      desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit, non.",
-      img: "https://images.pexels.com/photos/4230630/pexels-photo-4230630.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-    },
-    {
-      id: 4,
-      title: "Lorem ipsum dolor sit amet",
-      desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit, non.",
-      img: "https://images.pexels.com/photos/1434819/pexels-photo-1434819.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-    },
-  ];
+import { useEffect, useState } from "react";
+
+const Menu = ({ cat }) => {
+  const [posts, setPosts] = useState([]);
+
+  useEffect(() => {
+    const fetchPosts = async () => {
+      try {
+        const res = await axios.get(`http://localhost:8800/api/post/?${cat}`);
+        setPosts(res.data);
+      } catch (e) {
+        console.log(e);
+      }
+    };
+    fetchPosts();
+  }, [cat]);
+  // const posts = [
+  //   {
+  //     id: 1,
+  //     title: "Lorem ipsum dolor sit amet",
+  //     desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit, non.",
+  //     img: "https://images.pexels.com/photos/7008010/pexels-photo-7008010.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+  //   },
+  //   {
+  //     id: 2,
+  //     title: "Lorem ipsum dolor sit amet",
+  //     desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit, non.",
+  //     img: "https://images.pexels.com/photos/6489663/pexels-photo-6489663.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+  //   },
+  //   {
+  //     id: 3,
+  //     title: "Lorem ipsum dolor sit amet",
+  //     desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit, non.",
+  //     img: "https://images.pexels.com/photos/4230630/pexels-photo-4230630.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+  //   },
+  //   {
+  //     id: 4,
+  //     title: "Lorem ipsum dolor sit amet",
+  //     desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit, non.",
+  //     img: "https://images.pexels.com/photos/1434819/pexels-photo-1434819.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+  //   },
+  // ];
   return (
     <div className="menu">
       <h1>Other post you may like</h1>
